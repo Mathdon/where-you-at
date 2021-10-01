@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import path from 'path';
-import restify from 'restify';
+import express from 'express';
 import { adapter, EchoBot } from './bot';
 import tabs from './tabs';
 import MessageExtension from './message-extension';
@@ -14,28 +14,13 @@ import { ActivityTypes } from 'botbuilder';
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
-//Create HTTP server.
-const server = restify.createServer({
-    formatters: {
-        'text/html': function (req, res, body) {
-            return body;
-        },
-    },
-});
+const app = express();
+const PORT = process.env.port || process.env.PORT || 3333;
 
-server.get(
-    '/*',
-    restify.plugins.serveStatic({
-        directory: __dirname + '/static',
-    })
-);
-
-server.listen(process.env.port || process.env.PORT || 3333, function () {
-    console.log(`\n${server.name} listening to ${server.url}`);
-});
+app.use(express.static(path.join(__dirname, "/static")));
 
 // Adding tabs to our app. This will setup routes to various views
-tabs(server);
+tabs(app);
 
 // Adding a bot to our app
 const bot = new EchoBot();
@@ -44,10 +29,14 @@ const bot = new EchoBot();
 const messageExtension = new MessageExtension();
 
 // Listen for incoming requests.
-server.post('/api/messages', (req, res) => {
+app.post('/api/messages', (req, res) => {
     adapter.processActivity(req, res, async (context) => {
         if (context.activity.type === ActivityTypes.Invoke)
             await messageExtension.run(context);
         else await bot.run(context);
     });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
 });

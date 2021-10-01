@@ -6,3 +6,9 @@ html, body, div.surface, div.panel {
 div.panel {
     padding: 15px;
 }
+
+td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 16px;
+}
