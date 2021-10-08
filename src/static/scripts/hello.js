@@ -3,24 +3,24 @@
 
     const employees = [];
     const locations = [];
-    const locationSelectHtml = "<td><select name=\"location\">\n" +
-        "                                <option value=\"none\">None of your business</option>\n" +
-        "                                <option value=\"home\">Home</option>\n" +
-        "                                <option value=\"office\">Office</option>\n" +
-        "                            </select></td>"
+    // const locationSelectHtml = "<td><select name=\"location\">\n" +
+    //     "                                <option value=\"none\">None of your business</option>\n" +
+    //     "                                <option value=\"home\">Home</option>\n" +
+    //     "                                <option value=\"office\">Office</option>\n" +
+    //     "                            </select></td>"
     // const locationSelectHtml = "<td><select name=location>\n" + "<option value=\'location\'" + locations + "</option></select></td>"
 
-    function setLocations() {
-        return <td><select name=location>\n<option value=location>locations</option></select></td>
-    }
-
     // function setLocations() {
-    //     locations.forEach(function(location) {
-    //         return "<td><select name=\"location\">\n " +
-    //             "<option value=\"location\">" + location + "</option>\n)" +
-    //             "</select</td>"
-    //     })
+    //     return "<td><select name=location>\n<option value=location>locations</option></select></td>
     // }
+
+    function setLocations() {
+        let dropdown = "<td><select name=\"location\">\n ";
+        locations.forEach(function(location) {
+            dropdown = dropdown + "<option value=\"location\">" + location + "</option>\n)";
+        });
+        return dropdown + "</select</td>";
+    }
 
 
     function renderTable() {
