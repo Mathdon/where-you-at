@@ -2,11 +2,26 @@
     'use strict';
 
     const employees = [];
+    const locations = [];
     const locationSelectHtml = "<td><select name=\"location\">\n" +
         "                                <option value=\"none\">None of your business</option>\n" +
         "                                <option value=\"home\">Home</option>\n" +
         "                                <option value=\"office\">Office</option>\n" +
         "                            </select></td>"
+    // const locationSelectHtml = "<td><select name=location>\n" + "<option value=\'location\'" + locations + "</option></select></td>"
+
+    function setLocations() {
+        return <td><select name=location>\n<option value=location>locations</option></select></td>
+    }
+
+    // function setLocations() {
+    //     locations.forEach(function(location) {
+    //         return "<td><select name=\"location\">\n " +
+    //             "<option value=\"location\">" + location + "</option>\n)" +
+    //             "</select</td>"
+    //     })
+    // }
+
 
     function renderTable() {
         const table = document.getElementsByTagName('table')[0];
@@ -20,7 +35,8 @@
             for (let row of rows) {
                 if (row.id !== 'tableHeaderRow') {
                     const rowToUpdate = row
-                    rowToUpdate.innerHTML = rowToUpdate.innerHTML + locationSelectHtml;
+                    // rowToUpdate.innerHTML = rowToUpdate.innerHTML + locationSelectHtml;
+                    rowToUpdate.innerHTML = rowToUpdate.innerHTML + setLocations();
                 }
             }
         });
@@ -30,6 +46,12 @@
         const nameInput = document.getElementById('nameInput');
         employees.push(nameInput.value);
         nameInput.value = "";
+    };
+
+    document.getElementById('addLocationButton').onclick = function () {
+        const locationInput = document.getElementById('locationInput');
+        locations.push(locationInput.value);
+        locationInput.value = "";
     };
 
     document.getElementById('buildTableButton').onclick = function () {
