@@ -3,6 +3,8 @@
 
 import path from 'path';
 import express from 'express';
+import bodyParser from 'body-parser';
+import exphbs  from 'express-handlebars';
 import { adapter, EchoBot } from './bot';
 import tabs from './tabs';
 import MessageExtension from './message-extension';
@@ -17,7 +19,12 @@ require('dotenv').config({ path: ENV_FILE });
 const app = express();
 const PORT = process.env.port || process.env.PORT || 3333;
 
+app.engine('handlebars', exphbs({ defaultLayout: "", layoutsDir: "", }));
+app.set('views', path.join(__dirname, '/views'));
+app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, "/static")));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Adding tabs to our app. This will setup routes to various views
 tabs(app);

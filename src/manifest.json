@@ -27,7 +27,15 @@
         {
             "entityId": "com.contoso.helloworld.hellotab",
             "name": "Hello Tab",
-            "contentUrl": "https://1304-88-109-40-169.ngrok.io/hello",
+            "contentUrl": "https://1304-88-109-40-169.ngrok.io/create-team",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "com.contoso.helloworld.tabletab",
+            "name": "Table Tab",
+            "contentUrl": "https://1304-88-109-40-169.ngrok.io/table",
             "scopes": [
                 "personal"
             ]
