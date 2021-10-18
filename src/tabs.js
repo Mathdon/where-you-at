@@ -7,7 +7,7 @@ export default function tabs(server) {
     });
 
     // Setup the static tab
-    server.post('/table', (req, res, next) => {
+    server.get('/table', (req, res, next) => {
         const teamName = req.body.teamName;
         res.render('table', { teamName });
     });
