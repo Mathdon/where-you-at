@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    const CONTENT_URL = window.location.protocol + '//' + window.location.host + '/table';
+
     // Call the initialize API first
     microsoftTeams.initialize();
 
@@ -21,8 +23,8 @@
         // Let the Microsoft Teams platform know what you want to load based on
         // what the user configured on this page
         microsoftTeams.settings.setSettings({
-            contentUrl: createTabUrl(), // Mandatory parameter
-            entityId: createTabUrl(), // Mandatory parameter
+            contentUrl: CONTENT_URL, // Mandatory parameter
+            entityId: CONTENT_URL, // Mandatory parameter
         });
 
         // Tells Microsoft Teams platform that we are done saving our settings. Microsoft Teams waits
@@ -33,18 +35,18 @@
 
     // Logic to let the user configure what they want to see in the tab being loaded
     document.addEventListener('DOMContentLoaded', function () {
-        var tabChoice = document.getElementById('tabChoice');
-        if (tabChoice) {
-            tabChoice.onchange = function () {
-                var selectedTab = this[this.selectedIndex].value;
+        const teamNameInput = document.getElementById('teamNameInput');
 
-                // This API tells Microsoft Teams to enable the 'Save' button. Since Microsoft Teams always assumes
-                // an initial invalid state, without this call the 'Save' button will never be enabled.
-                microsoftTeams.settings.setValidityState(
-                    selectedTab === 'first' || selectedTab === 'second'
-                );
-            };
-        }
+        teamNameInput.addEventListener('input',function (event) {
+            const teamName = event.target.value;
+            console.log('On change handler invoked', teamName);
+
+            if (teamName && teamName !== "") {
+                microsoftTeams.settings.setValidityState(true);
+            } else {
+                microsoftTeams.settings.setValidityState(false);
+            }
+        });
     });
 
     // Set the desired theme
@@ -54,19 +56,5 @@
             document.body.className =
                 'theme-' + (theme === 'default' ? 'light' : theme);
         }
-    }
-
-    // Create the URL that Microsoft Teams will load in the tab. You can compose any URL even with query strings.
-    function createTabUrl() {
-        var tabChoice = document.getElementById('tabChoice');
-        var selectedTab = tabChoice[tabChoice.selectedIndex].value;
-
-        return (
-            window.location.protocol +
-            '//' +
-            window.location.host +
-            '/' +
-            selectedTab
-        );
     }
 })();
