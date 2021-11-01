@@ -19,7 +19,12 @@ require('dotenv').config({ path: ENV_FILE });
 const app = express();
 const PORT = process.env.port || process.env.PORT || 3333;
 
-app.engine('handlebars', exphbs({ defaultLayout: "", layoutsDir: "", }));
+app.engine('handlebars', exphbs({
+    defaultLayout: "",
+    layoutsDir: "",
+    partialsDir: __dirname + '/views/partials/',
+    helpers: require('./config/handlebars-helpers')
+}));
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, "/static")));

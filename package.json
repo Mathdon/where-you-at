@@ -17,7 +17,10 @@
   },
   "homepage": "https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs",
   "dependencies": {
+    "@azure/identity": "^2.0.0",
     "@babel/polyfill": "^7.8.7",
+    "@microsoft/microsoft-graph-client": "^3.0.0",
+    "axios": "^0.24.0",
     "body-parser": "^1.19.0",
     "botbuilder": "^4.8.0",
     "config": "^1.28.1",
@@ -26,6 +29,7 @@
     "express": "^4.16.2",
     "express-handlebars": "^5.3.4",
     "faker": "^4.1.0",
+    "isomorphic-fetch": "^3.0.0",
     "path": "^0.12.7",
     "restify": "^8.5.1",
     "send": "^0.17.1"
@@ -36,6 +40,7 @@
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.9.6",
     "@babel/register": "^7.9.0",
+    "@microsoft/microsoft-graph-types": "^2.8.0",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-zip": "^5.0.1",

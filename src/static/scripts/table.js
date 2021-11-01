@@ -14,6 +14,14 @@
     //     return "<td><select name=location>\n<option value=location>locations</option></select></td>
     // }
 
+    // Call the initialize API first
+    microsoftTeams.initialize();
+
+    microsoftTeams.getContext(function (context) {
+        const teamName = document.getElementById("teamName");
+        teamName.innerHTML = context.channelName;
+    });
+
     function setLocations() {
         let dropdown = "<td><select name=\"location\">\n ";
         locations.forEach(function(location) {

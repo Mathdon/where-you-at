@@ -1,4 +1,5 @@
 import send from 'send';
+import {getTeamsMembers} from "./api/microsoft-client";
 
 export default function tabs(server) {
     // Setup home page
@@ -7,9 +8,18 @@ export default function tabs(server) {
     });
 
     // Setup the static tab
-    server.get('/table', (req, res, next) => {
-        const teamName = req.body.teamName;
-        res.render('table', { teamName });
+    server.get('/table', async (req, res, next) => {
+        let { locations } = req.query;
+
+        if (locations) {
+            locations = req.query.locations.split(',');
+        } else {
+            locations = ['Office', 'Home'];
+        }
+
+        const members = await getTeamsMembers();
+        const memberNames = members.map((member) => member.displayName);
+        res.render('table', { members: memberNames, locations });
     });
 
     // Serve create team tab
@@ -17,10 +27,9 @@ export default function tabs(server) {
         res.render('create-team');
     });
 
-
     // Setup the configure tab, with first and second as content tabs
-    server.get('/configure', (req, res, next) => {
-        send(req, 'src/views/configure.html').pipe(res);
+    server.get('/team-name', (req, res, next) => {
+        send(req, 'src/views/team-name.html').pipe(res);
     });
 
     server.get('/first', (req, res, next) => {

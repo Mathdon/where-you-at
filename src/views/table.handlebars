@@ -10,36 +10,43 @@
     <body class="theme-light">
         <div class="surface">
             <div class="panel">
-                <h1>Hello {{{ teamName }}}</h1>
-                <div>
-                    <input id="nameInput" placeholder="Employee name" name="name"/>
-                    <button id="addEmployeeButton">Add</button>
-                    <button id="display">Display</button>
-                    <button id="buildTableButton">Build table</button>
-                </div>
-                <div>
-                    <input id="locationInput" placeholder="Employee location" name="location"/>
-                    <button id="addLocationButton">Add</button>
-                </div>
-                <div class="font-semibold font-title">Week</div>
+                <h1 id="teamName"></h1>
                 <table>
                     <tr id="tableHeaderRow">
                         <th>Day of Week</th>
+                        {{#each members}}
+                            <th>{{this}}</th>
+                        {{/each}}
                     </tr>
                     <tr>
                         <td>Monday</td>
+                        {{#each members}}
+                            <td>{{> dropdown options=../locations }}</td>
+                        {{/each}}
                     </tr>
                     <tr>
                         <td>Tuesday</td>
+                        {{#each members}}
+                            <td>{{> dropdown options=../locations }}</td>
+                        {{/each}}
                     </tr>
                     <tr>
                         <td>Wednesday</td>
+                        {{#each members}}
+                            <td>{{> dropdown options=../locations }}</td>
+                        {{/each}}
                     </tr>
                     <tr>
                         <td>Thursday</td>
+                        {{#each members}}
+                            <td>{{> dropdown options=../locations }}</td>
+                        {{/each}}
                     </tr>
                     <tr>
                         <td>Friday</td>
+                        {{#each members}}
+                            <td>{{> dropdown options=../locations }}</td>
+                        {{/each}}
                     </tr>
                 </table>
             </div>

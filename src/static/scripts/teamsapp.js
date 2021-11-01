@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    const CONTENT_URL = window.location.protocol + '//' + window.location.host + '/table';
+    const locations = '';
+    const CONTENT_URL = window.location.protocol + '//' + window.location.host + `/table${locations ? `?locations=${locations}` : ''}`;
 
     // Call the initialize API first
     microsoftTeams.initialize();
@@ -35,18 +36,21 @@
 
     // Logic to let the user configure what they want to see in the tab being loaded
     document.addEventListener('DOMContentLoaded', function () {
-        const teamNameInput = document.getElementById('teamNameInput');
+        // const teamNameInput = document.getElementById('locationInput');
+        // const addLocationButton = document
+        microsoftTeams.settings.setValidityState(true);
 
-        teamNameInput.addEventListener('input',function (event) {
-            const teamName = event.target.value;
-            console.log('On change handler invoked', teamName);
 
-            if (teamName && teamName !== "") {
-                microsoftTeams.settings.setValidityState(true);
-            } else {
-                microsoftTeams.settings.setValidityState(false);
-            }
-        });
+        // loca.addEventListener('input',function (event) {
+        //     const teamName = event.target.value;
+        //     console.log('On change handler invoked', teamName);
+        //
+        //     if (teamName && teamName !== "") {
+        //         microsoftTeams.settings.setValidityState(true);
+        //     } else {
+        //         microsoftTeams.settings.setValidityState(false);
+        //     }
+        // });
     });
 
     // Set the desired theme
