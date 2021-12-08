@@ -1,8 +1,7 @@
 (function () {
     'use strict';
 
-    const locations = '';
-    const CONTENT_URL = window.location.protocol + '//' + window.location.host + `/table${locations ? `?locations=${locations}` : ''}`;
+    const locations = ['Please select location', 'Home', 'Not working'];
 
     // Call the initialize API first
     microsoftTeams.initialize();
@@ -21,11 +20,13 @@
 
     // Save configuration changes
     microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+        const locationsUrlQuery = `?locations=${locations.join(',')}`;
+        const contentUrl = window.location.protocol + '//' + window.location.host + `/calender${locationsUrlQuery}`;
         // Let the Microsoft Teams platform know what you want to load based on
         // what the user configured on this page
         microsoftTeams.settings.setSettings({
-            contentUrl: CONTENT_URL, // Mandatory parameter
-            entityId: CONTENT_URL, // Mandatory parameter
+            contentUrl: contentUrl, // Mandatory parameter
+            entityId: contentUrl, // Mandatory parameter
         });
 
         // Tells Microsoft Teams platform that we are done saving our settings. Microsoft Teams waits
@@ -36,21 +37,13 @@
 
     // Logic to let the user configure what they want to see in the tab being loaded
     document.addEventListener('DOMContentLoaded', function () {
-        // const teamNameInput = document.getElementById('locationInput');
-        // const addLocationButton = document
         microsoftTeams.settings.setValidityState(true);
 
-
-        // loca.addEventListener('input',function (event) {
-        //     const teamName = event.target.value;
-        //     console.log('On change handler invoked', teamName);
-        //
-        //     if (teamName && teamName !== "") {
-        //         microsoftTeams.settings.setValidityState(true);
-        //     } else {
-        //         microsoftTeams.settings.setValidityState(false);
-        //     }
-        // });
+        document.getElementById('addLocationButton').addEventListener('click', function () {
+            const location = document.getElementById('locationInput').value;
+            locations.push(location);
+            document.getElementById('locationInput').value = '';
+        });
     });
 
     // Set the desired theme

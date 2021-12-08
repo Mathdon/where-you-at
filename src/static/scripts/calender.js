@@ -18,8 +18,7 @@
     microsoftTeams.initialize();
 
     microsoftTeams.getContext(function (context) {
-        const teamName = document.getElementById("teamName");
-        teamName.innerHTML = context.channelName;
+        // you can access microsoft context object here.
     });
 
     function setLocations() {

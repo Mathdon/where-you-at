@@ -1,7 +1,7 @@
 {
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.3/MicrosoftTeams.schema.json",
     "manifestVersion": "1.3",
-    "version": "1.0.23",
+    "version": "1.0.25",
     "id": "00000000-0000-0000-0000-000000000000",
     "packageName": "com.contoso.helloworld",
     "developer": {
@@ -25,17 +25,9 @@
     "accentColor": "#60A18E",
     "staticTabs": [
         {
-            "entityId": "com.contoso.helloworld.hellotab",
-            "name": "Hello Tab",
-            "contentUrl": "https://f542-109-152-207-191.ngrok.io/create-team",
-            "scopes": [
-                "team"
-            ]
-        },
-        {
             "entityId": "com.contoso.helloworld.tabletab",
             "name": "Table Tab",
-            "contentUrl": "https://f542-109-152-207-191.ngrok.io/table",
+            "contentUrl": "https://067e-109-148-4-133.ngrok.io/calender",
             "scopes": [
                 "team"
             ]
@@ -43,7 +35,7 @@
     ],
     "configurableTabs": [
         {
-            "configurationUrl": "https://f542-109-152-207-191.ngrok.io/team-name",
+            "configurationUrl": "https://067e-109-148-4-133.ngrok.io/configure",
             "canUpdateConfiguration": true,
             "scopes": [
                 "team"

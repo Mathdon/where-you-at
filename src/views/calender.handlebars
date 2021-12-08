@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Microsoft Teams Hello World Sample App</title>
+        <link rel="stylesheet" type="text/css" href="/styles/msteams-16.css">
+        <link rel="stylesheet" type="text/css" href="/styles/custom.css">
+        <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+        <script src="/scripts/teamsapp.js"></script>
+    </head>
+    <body class="theme-light">
+        <div class="surface">
+            <div class="panel">
+                <div>
+                    <button><-</button>
+                    <button>-></button>
+                    <p>W/C: {{weekCommencing}}</p>
+                </div>
+                <table>
+                    <tr id="tableHeaderRow">
+                        <th>Employee</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                    </tr>
+                    {{#each members}}
+                        <tr>
+                            <td>{{this}}</td>
+                            <td>{{> dropdown options=../locations }}</td>
+                            <td>{{> dropdown options=../locations }}</td>
+                            <td>{{> dropdown options=../locations }}</td>
+                            <td>{{> dropdown options=../locations }}</td>
+                            <td>{{> dropdown options=../locations }}</td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+        </div>
+        <script src="/scripts/calender.js"></script>
+    </body>
+</html>
